@@ -1,8 +1,8 @@
 # User config
 set script_dir [file dirname [file normalize [info script]]]
 
-# HACK: edited this, instead of relying on the Makefile to prep this for us
-set ::env(DESIGN_NAME) scan_wrapper_340579111348994642
+# has to match the module name from wokwi
+set ::env(DESIGN_NAME) scan_wrapper_USER_MODULE_ID
 
 # save some time
 set ::env(RUN_KLAYOUT_XOR) 0
@@ -14,16 +14,8 @@ set ::env(PL_RESIZER_BUFFER_OUTPUT_PORTS) 0
 # allow use of specific sky130 cells
 set ::env(SYNTH_READ_BLACKBOX_LIB) 1
 
-# HACK: explicitly specify which files we are using, ignore TB etc.
-set ::env(VERILOG_FILES) "$::env(DESIGN_DIR)/user_module_340579111348994642.v \
-$::env(DESIGN_DIR)/scan_wrapper_340579111348994642.v \
-$::env(DESIGN_DIR)/bcd_decoder.v \
-$::env(DESIGN_DIR)/ctrl.v \
-$::env(DESIGN_DIR)/clock.v \
-$::env(DESIGN_DIR)/mux_6_4b.v \
-$::env(DESIGN_DIR)/output_sr.v \
-$::env(DESIGN_DIR)/bcd_counter.v \
-$::env(DESIGN_DIR)/rise_edge.v"
+# read all verilog files
+set ::env(VERILOG_FILES) [glob $::env(DESIGN_DIR)/*.v]
 
 # absolute die size
 set ::env(FP_SIZING) absolute
